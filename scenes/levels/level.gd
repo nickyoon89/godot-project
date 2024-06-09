@@ -17,7 +17,8 @@ func test_function():
 
 
 func _on_gate_player_entered_gate(_body):
-		print("player has entered gate")
+		var tween = create_tween()
+		tween.tween_property($Player, "speed", 0, 0.5)
 
 
 func _on_player_laser_triggered(pos, direction):
@@ -37,4 +38,12 @@ func _on_player_grenade_triggered(pos, direction):
 
 func _on_house_player_entered():
 	var tween = get_tree().create_tween()
+	tween.set_parallel(true) #if there are more than one animation, and you want to play all the same time
 	tween.tween_property($Player/Camera2D, "zoom", Vector2(1, 1), 1)
+	#you can also use .from after this to set the start value
+	
+
+
+func _on_house_player_exited():
+	var tween = get_tree().create_tween()
+	tween.tween_property($Player/Camera2D, "zoom", Vector2(0.6, 0.6), 1)

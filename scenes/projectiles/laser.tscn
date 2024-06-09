@@ -35,3 +35,12 @@ spread = 44.09
 gravity = Vector2(2.08165e-12, 2.08165e-12)
 scale_amount_min = 0.5
 color_ramp = SubResource("Gradient_mo2e7")
+
+[node name="SelfDestructTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="timeout" from="SelfDestructTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SelfDestructTimer" to="." method="_on_self_destruct_timer_timeout"]

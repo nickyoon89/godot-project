@@ -5,9 +5,12 @@ signal laser_triggered(pos, direction)
 var can_grenade = true
 signal grenade_triggered(pos, direction)
 
+@export var max_speed: int = 500
+var speed:int = max_speed
+
 func _process(_delta):
 	var direction = Input.get_vector("left","right","up","down")
-	velocity = direction * 500
+	velocity = direction * speed
 	move_and_slide()
 	
 	#rotate
