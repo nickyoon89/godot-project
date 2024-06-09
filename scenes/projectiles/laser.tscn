@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://xg6t1d7cs2xs"]
+
+[ext_resource type="Texture2D" uid="uid://7bknxlilrw32" path="res://graphics/projectiles/blue.png" id="1_j70gd"]
+[ext_resource type="Script" path="res://scenes/projectiles/laser.gd" id="1_smqgm"]
+[ext_resource type="Texture2D" uid="uid://80fcy17qjysy" path="res://graphics/decals/white.png" id="3_416ay"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xx0yt"]
+radius = 5.0
+height = 108.0
+
+[sub_resource type="Gradient" id="Gradient_mo2e7"]
+colors = PackedColorArray(0.0967325, 0.334114, 1, 1, 0.647059, 0.764706, 1, 0.188235)
+
+[node name="Laser" type="Area2D"]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_smqgm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 26)
+texture = ExtResource("1_j70gd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_xx0yt")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 45)
+amount = 20
+speed_scale = 5.0
+texture = ExtResource("3_416ay")
+emission_shape = 1
+emission_sphere_radius = 13.5
+direction = Vector2(1, 40)
+spread = 44.09
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+scale_amount_min = 0.5
+color_ramp = SubResource("Gradient_mo2e7")

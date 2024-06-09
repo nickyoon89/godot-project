@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7rayqbuqcqn8"]
+
+[ext_resource type="Texture2D" uid="uid://c1h2dfpbtf8nx" path="res://graphics/player/player.png" id="1_7ugo5"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_xyg1o"]
+[ext_resource type="Texture2D" uid="uid://80fcy17qjysy" path="res://graphics/decals/white.png" id="3_rb5q6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uf3s3"]
+radius = 62.0081
+
+[sub_resource type="Gradient" id="Gradient_ned5y"]
+colors = PackedColorArray(0.733333, 0.47451, 1, 0.784314, 0.937255, 0.701961, 1, 0.94902)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w7ued"]
+polygon = PackedVector2Array(-15, -52, -29, -47, -29, -43, -31, -42, -48, -38, -55, -30, -56, -26, -61, -16, -61, -2, -61, 12, -53, 18, -53, 21, -55, 27, -48, 36, -44, 45, -38, 48, -39, 55, -23, 65, -12, 64, 3, 62, 16, 55, 28, 50, 41, 45, 59, 45, 56, 52, 60, 56, 91, 57, 94, 55, 95, 49, 100, 47, 106, 41, 119, 42, 120, 37, 125, 38, 128, 36, 132, 30, 132, 17, 127, 10, 117, 5, 109, 5, 106, 1, 96, 0, 87, -7, 76, -6, 74, -6, 62, -20, 52, -25, 47, -25, 42, -33, 43, -35, 34, -44, 27, -54, 19, -57, 7, -54, -5, -54)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 31
+script = ExtResource("1_xyg1o")
+
+[node name="PlayerImage" type="Sprite2D" parent="."]
+position = Vector2(35, 5)
+rotation = 1.5708
+texture = ExtResource("1_7ugo5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uf3s3")
+
+[node name="LaserReloadTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="GeneradeReloadTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="LaserStartPositions" type="Node2D" parent="."]
+rotation = 1.5708
+
+[node name="Marker2D" type="Marker2D" parent="LaserStartPositions"]
+position = Vector2(19, -127)
+rotation = 1.5708
+
+[node name="Marker2D2" type="Marker2D" parent="LaserStartPositions"]
+position = Vector2(10, -123)
+rotation = 1.5708
+
+[node name="Marker2D3" type="Marker2D" parent="LaserStartPositions"]
+position = Vector2(29, -123)
+rotation = 1.5708
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(130, 24)
+emitting = false
+lifetime = 0.2
+one_shot = true
+texture = ExtResource("3_rb5q6")
+spread = 18.64
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 750.0
+initial_velocity_max = 1000.0
+scale_amount_min = 0.3
+scale_amount_max = 0.8
+color = Color(0.733333, 0.47451, 1, 0.67451)
+color_ramp = SubResource("Gradient_ned5y")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_w7ued")
+
+[connection signal="timeout" from="LaserReloadTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="GeneradeReloadTimer" to="." method="_on_timer_2_timeout"]
