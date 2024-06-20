@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1e46spylbqt6"]
+
+[ext_resource type="Texture2D" uid="uid://dspmtgglysse5" path="res://graphics/enemies/scout.png" id="1_3r28c"]
+[ext_resource type="Script" path="res://scenes/enemies/scout.gd" id="1_c5y41"]
+[ext_resource type="Shader" path="res://scenes/enemies/scout.gdshader" id="2_d0fj1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3yxr"]
+shader = ExtResource("2_d0fj1")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/progress = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3x0hv"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgjch"]
+radius = 816.787
+
+[node name="Scout" type="CharacterBody2D" groups=["Entity", "Scouts"]]
+collision_layer = 2
+collision_mask = 11
+script = ExtResource("1_c5y41")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_f3yxr")
+position = Vector2(23, 34)
+rotation = 1.5708
+texture = ExtResource("1_3r28c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-32, 7)
+shape = SubResource("CircleShape2D_3x0hv")
+
+[node name="AttackArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_cgjch")
+
+[node name="LaserSpawnPositions" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="LaserSpawnPositions"]
+position = Vector2(100, -20)
+
+[node name="Marker2D2" type="Marker2D" parent="LaserSpawnPositions"]
+position = Vector2(112, 21)
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="LaserCooldown" type="Timer" parent="Timers"]
+
+[node name="DmgCooldown" type="Timer" parent="Timers"]
+wait_time = 0.5
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="Timers/LaserCooldown" to="." method="_on_laser_cooldown_timeout"]
+[connection signal="timeout" from="Timers/DmgCooldown" to="." method="_on_dmg_cooldown_timeout"]

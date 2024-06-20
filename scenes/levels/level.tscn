@@ -1,132 +1,35 @@
-[gd_scene load_steps=20 format=3 uid="uid://bpvxy32eq185a"]
+[gd_scene load_steps=4 format=3 uid="uid://bpvxy32eq185a"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_c2x6l"]
-[ext_resource type="PackedScene" uid="uid://cdg788mt0u1v4" path="res://scenes/objects/gate.tscn" id="2_7gu77"]
-[ext_resource type="Texture2D" uid="uid://cqmdfjmng4efs" path="res://graphics/ground/stones.png" id="2_hyljb"]
-[ext_resource type="Texture2D" uid="uid://d3w6s6vhqirk6" path="res://graphics/decals/dirt_patch.png" id="3_bq07f"]
-[ext_resource type="Texture2D" uid="uid://bdh51yd1g0hry" path="res://graphics/decals/moss/moss_1.png" id="4_bhsi3"]
+[ext_resource type="PackedScene" uid="uid://dqgssuqvvqrtu" path="res://scenes/user interface/ui.tscn" id="3_pv5l4"]
 [ext_resource type="PackedScene" uid="uid://c7rayqbuqcqn8" path="res://scenes/player/player.tscn" id="4_ee6td"]
-[ext_resource type="Texture2D" uid="uid://w6r2g5nwcasq" path="res://graphics/decals/moss/moss_3.png" id="5_pov2f"]
-[ext_resource type="Texture2D" uid="uid://qxfx3h3xscys" path="res://graphics/decals/moss/moss_2.png" id="6_rwcwx"]
-[ext_resource type="Texture2D" uid="uid://dphx6fe3cobsp" path="res://graphics/decals/moss/moss_4.png" id="7_4xp38"]
-[ext_resource type="Texture2D" uid="uid://djddqifacy5rw" path="res://graphics/decals/moss/moss_5.png" id="8_681qu"]
-[ext_resource type="Texture2D" uid="uid://bhiajoi2dbgei" path="res://graphics/tilesets/outside_walls.png" id="9_kxi4i"]
-[ext_resource type="Texture2D" uid="uid://bxthd2albdm3" path="res://graphics/tilesets/soil.png" id="10_g2ero"]
-[ext_resource type="PackedScene" uid="uid://bpv3xqvwr1eg3" path="res://scenes/objects/steam_vent.tscn" id="11_82mxa"]
-[ext_resource type="PackedScene" uid="uid://vwx1s7bn34j6" path="res://scenes/houses/house.tscn" id="13_lsxxf"]
-[ext_resource type="PackedScene" uid="uid://ddgxnysli1hat" path="res://scenes/objects/light_fan_animation.tscn" id="15_3bp4v"]
-[ext_resource type="PackedScene" uid="uid://bi153l402gdve" path="res://scenes/enemys/drone.tscn" id="16_rdcft"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xalyf"]
-resource_name = "walls"
-texture = ExtResource("9_kxi4i")
-texture_region_size = Vector2i(390, 390)
-0:3/0 = 0
-1:2/0 = 0
-0:2/0 = 0
-0:1/0 = 0
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-2:1/0 = 0
-2:2/0 = 0
-1:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v1vbj"]
-resource_name = "soil"
-texture = ExtResource("10_g2ero")
-texture_region_size = Vector2i(390, 390)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_65iud"]
-tile_size = Vector2i(390, 390)
-sources/0 = SubResource("TileSetAtlasSource_xalyf")
-sources/1 = SubResource("TileSetAtlasSource_v1vbj")
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_c2x6l")
 
+[node name="Decals" type="Node2D" parent="."]
+
 [node name="Ground" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="Soil" type="Sprite2D" parent="Ground"]
-texture_repeat = 2
-texture = ExtResource("2_hyljb")
-region_enabled = true
-region_rect = Rect2(-1452.06, -920.031, 6046.02, 4108.49)
-
-[node name="Decoration" type="Sprite2D" parent="Ground"]
-modulate = Color(0.72549, 0.619608, 0.462745, 0.74902)
-position = Vector2(-1386, 1253)
-texture = ExtResource("3_bq07f")
-
-[node name="Moss1" type="Sprite2D" parent="Ground"]
-position = Vector2(1705, 1238)
-texture = ExtResource("4_bhsi3")
-
-[node name="Moss3" type="Sprite2D" parent="Ground"]
-position = Vector2(2237, 601)
-texture = ExtResource("5_pov2f")
-
-[node name="Moss2" type="Sprite2D" parent="Ground"]
-position = Vector2(601, 1333)
-texture = ExtResource("6_rwcwx")
-
-[node name="Moss4" type="Sprite2D" parent="Ground"]
-position = Vector2(2409, 1419)
-texture = ExtResource("7_4xp38")
-
-[node name="Moss5" type="Sprite2D" parent="Ground"]
-position = Vector2(1181, 1733)
-texture = ExtResource("8_681qu")
-
-[node name="TileMap" type="TileMap" parent="Ground"]
-position = Vector2(0, 3)
-tile_set = SubResource("TileSet_65iud")
-format = 2
-layer_0/name = "Soil"
-layer_0/tile_data = PackedInt32Array(65529, 1, 0, 65530, 65537, 0, 65531, 131073, 0)
-layer_1/name = "Walls"
-layer_1/tile_data = PackedInt32Array(65531, 131072, 0, 65530, 65536, 0, 65529, 65536, 0, 65528, 65536, 1, 5, 0, 0, 6, 65536, 0, 7, 131072, 1, 65543, 0, 2, 131079, 0, 2, 196615, 0, 2, 262151, 131072, 2, 262150, 65536, 0, 262149, 65536, 0, 262148, 65536, 0, 262147, 65536, 0, 262146, 65536, 0, 262145, 65536, 0, 262144, 65536, 0, 327679, 65536, 0, 327678, 65536, 0, 327677, 65536, 0, 327676, 65536, 0, 327675, 65536, 0, 327674, 65536, 0, 327673, 65536, 0, 327672, 65536, 2, 262136, 0, 2, 196600, 0, 2, 131064, 0, 2, 131065, 1, 2, 131066, 65537, 2, 131067, 131073, 2)
-
-[node name="SteamVent" parent="Ground" instance=ExtResource("11_82mxa")]
-position = Vector2(-388, 672)
-
-[node name="Gate" parent="." instance=ExtResource("2_7gu77")]
-metadata/_edit_lock_ = true
-
-[node name="House" parent="." instance=ExtResource("13_lsxxf")]
-position = Vector2(558, 3581)
-rotation = -2.45393
-metadata/_edit_lock_ = true
-
-[node name="Player" parent="." instance=ExtResource("4_ee6td")]
-position = Vector2(176, 749)
-metadata/_edit_lock_ = true
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.6, 0.6)
-position_smoothing_enabled = true
+[node name="Infestation" type="Node" parent="."]
 
 [node name="Projectiles" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="LightFanAnimation" parent="." instance=ExtResource("15_3bp4v")]
-position = Vector2(-668, 1429)
+[node name="Items" type="Node2D" parent="."]
 
-[node name="Drone" parent="." instance=ExtResource("16_rdcft")]
-position = Vector2(207, 1102)
+[node name="Enemies" type="Node2D" parent="."]
 
-[connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
-[connection signal="player_entered" from="House" to="." method="_on_house_player_entered"]
-[connection signal="player_exited" from="House" to="." method="_on_house_player_exited"]
+[node name="Player" parent="." groups=["Entity"] instance=ExtResource("4_ee6td")]
+position = Vector2(176, 749)
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.4, 0.4)
+position_smoothing_enabled = true
+
+[node name="UI" parent="." instance=ExtResource("3_pv5l4")]
+
 [connection signal="grenade_triggered" from="Player" to="." method="_on_player_grenade_triggered"]
 [connection signal="laser_triggered" from="Player" to="." method="_on_player_laser_triggered"]

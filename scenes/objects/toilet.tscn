@@ -1,16 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://p6yv12gfbe4n"]
+[gd_scene load_steps=6 format=3 uid="uid://p6yv12gfbe4n"]
 
 [ext_resource type="Texture2D" uid="uid://dgmke4yn1j8kd" path="res://graphics/objects/toilet.png" id="1_87peo"]
+[ext_resource type="PackedScene" uid="uid://dkian3o0fmlfl" path="res://scenes/container/item_container.tscn" id="1_wnm2m"]
+[ext_resource type="Script" path="res://scenes/objects/toilet.gd" id="2_f2pef"]
+[ext_resource type="Texture2D" uid="uid://de57tyfx3vpub" path="res://graphics/objects/lid.png" id="4_11h0n"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_075fy"]
-size = Vector2(210, 242)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uel51"]
+size = Vector2(227, 239)
 
-[node name="Toilet" type="StaticBody2D"]
-collision_layer = 4
-collision_mask = 11
+[node name="toilet" instance=ExtResource("1_wnm2m")]
+script = ExtResource("2_f2pef")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BaseSprite" parent="." index="0"]
 texture = ExtResource("1_87peo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_075fy")
+[node name="LidSprite" parent="." index="1"]
+position = Vector2(0, 28)
+texture = ExtResource("4_11h0n")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(-4.5, 1.5)
+shape = SubResource("RectangleShape2D_uel51")
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPositions" index="0"]

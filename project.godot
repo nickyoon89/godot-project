@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="godot-project"
-run/main_scene="res://scenes/levels/level.tscn"
+run/main_scene="res://scenes/levels/outside.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Globals="*res://globals/globals.gd"
+TransitionLayer="*res://globals/transition_layer.tscn"
 
 [display]
 

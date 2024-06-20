@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcf8iangegg2i"]
+
+[ext_resource type="Texture2D" uid="uid://dan5jsapkgs8" path="res://graphics/objects/box/base.png" id="1_4ckiw"]
+[ext_resource type="Script" path="res://scenes/objects/crate.gd" id="1_jfnlo"]
+[ext_resource type="PackedScene" uid="uid://dkian3o0fmlfl" path="res://scenes/container/item_container.tscn" id="1_vbq1s"]
+[ext_resource type="Texture2D" uid="uid://dbqws3isfv5qf" path="res://graphics/objects/box/lid.png" id="2_m8a6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ma732"]
+size = Vector2(378, 168)
+
+[node name="Crate" instance=ExtResource("1_vbq1s")]
+script = ExtResource("1_jfnlo")
+
+[node name="BaseSprite" parent="." index="0"]
+texture = ExtResource("1_4ckiw")
+
+[node name="LidSprite" parent="." index="1"]
+position = Vector2(0, 8)
+texture = ExtResource("2_m8a6t")
+
+[node name="CollisionShape2D" parent="." index="2"]
+shape = SubResource("RectangleShape2D_ma732")
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPositions" index="0"]
+position = Vector2(141, -53)
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnPositions" index="1"]
+position = Vector2(68, -22)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnPositions" index="2"]
+position = Vector2(119, 26)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnPositions" index="3"]
+position = Vector2(52, 31)
+
+[node name="Marker2D5" type="Marker2D" parent="SpawnPositions" index="4"]
+position = Vector2(-73, -31)
+
+[node name="Marker2D6" type="Marker2D" parent="SpawnPositions" index="5"]
+position = Vector2(-41, 26)
+
+[node name="Marker2D7" type="Marker2D" parent="SpawnPositions" index="6"]
+position = Vector2(-17, -49)
+
+[node name="Marker2D8" type="Marker2D" parent="SpawnPositions" index="7"]
+position = Vector2(-145, 25)
+
+[node name="Marker2D9" type="Marker2D" parent="SpawnPositions" index="8"]
+position = Vector2(-126, -8)
+
+[node name="Marker2D10" type="Marker2D" parent="SpawnPositions" index="9"]
+position = Vector2(-152, -51)
