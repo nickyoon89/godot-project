@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=3 uid="uid://de71dlug3vnx"]
+
+[ext_resource type="Script" path="res://scenes/enemies/car.gd" id="1_gbi2k"]
+[ext_resource type="Texture2D" uid="uid://b3vvjrvqf2gr8" path="res://graphics/car/main.png" id="1_uon64"]
+[ext_resource type="Texture2D" uid="uid://b6e5cjpijcn4g" path="res://graphics/car/turret.png" id="3_jm8lo"]
+[ext_resource type="Texture2D" uid="uid://ctue5iuqes1sp" path="res://graphics/explosions/gun.png" id="4_sxc47"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_diha7"]
+radius = 743.011
+
+[sub_resource type="Animation" id="Animation_dnewr"]
+resource_name = "laser_load"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Turret/RayCast2D/Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [2.08165e-12, 2.08165e-12, 10.0, 2.08165e-12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Turret/RayCast2D2/Line2D:width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [2.08165e-12, 2.08165e-12, 10.0, 2.08165e-12]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tfpy7"]
+_data = {
+"laser_load": SubResource("Animation_dnewr")
+}
+
+[node name="Car" type="PathFollow2D"]
+script = ExtResource("1_gbi2k")
+metadata/_edit_lock_ = true
+
+[node name="NoticeArea" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea"]
+shape = SubResource("CircleShape2D_diha7")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 11
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+polygon = PackedVector2Array(-165, -160, -98, -173, -37, -164, -29, -104, 3, -124, 62, -112, 66, -162, 181, -164, 209, -153, 247, -93, 249, 88, 208, 169, 169, 175, 73, 175, 59, 130, 1, 142, -25, 112, -29, 182, -171, 181, -170, 113, -144, 112, -142, 90, -169, 85, -174, 54, -230, 55, -235, -35, -172, -48, -167, -80, -141, -74, -148, -99, -170, -105)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(61, 6)
+rotation = 1.5708
+texture = ExtResource("1_uon64")
+
+[node name="Turret" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Turret"]
+rotation = 1.5708
+texture = ExtResource("3_jm8lo")
+
+[node name="RayCast2D" type="RayCast2D" parent="Turret"]
+position = Vector2(115, -25)
+target_position = Vector2(620, 2.08165e-12)
+
+[node name="Line2D" type="Line2D" parent="Turret/RayCast2D"]
+points = PackedVector2Array(0, 0, 618, 0)
+width = 1.65571e-07
+default_color = Color(1, 0.254902, 0, 0.788235)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Turret"]
+position = Vector2(115, -25)
+target_position = Vector2(620, 2.08165e-12)
+
+[node name="Line2D" type="Line2D" parent="Turret/RayCast2D2"]
+position = Vector2(-2, 57)
+points = PackedVector2Array(0, 0, 618, 0)
+width = 1.65571e-07
+default_color = Color(1, 0.254902, 0, 0.788235)
+
+[node name="GunFire" type="Node2D" parent="Turret"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="GunShot" type="Sprite2D" parent="Turret/GunFire"]
+position = Vector2(257, -27)
+rotation = 1.5708
+texture = ExtResource("4_sxc47")
+
+[node name="GunShot2" type="Sprite2D" parent="Turret/GunFire"]
+position = Vector2(254, 36)
+rotation = 1.5708
+texture = ExtResource("4_sxc47")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tfpy7")
+}
+
+[connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
+[connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]

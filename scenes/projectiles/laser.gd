@@ -15,6 +15,7 @@ func _on_body_entered(body):
 
 func _ready():
 	$SelfDestructTimer.start()
+	$AudioStreamPlayer2D.play()
 
 
 func _on_self_destruct_timer_timeout():

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cksfywd4lph73"]
+
+[ext_resource type="AudioStream" uid="uid://hdd14aw0ex7u" path="res://audio/battleThemeA.mp3" id="1_hs3d1"]
+
+[node name="Music" type="Node2D"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_hs3d1")
+autoplay = true
